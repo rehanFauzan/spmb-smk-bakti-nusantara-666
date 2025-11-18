@@ -1,0 +1,292 @@
+/* Custom Theme Colors for Admin Panel */
+/* Color Palette: #F9F7F7, #DBE2EF, #3F72AF, #112D4E */
+
+:root {
+  --primary-color: #3F72AF;
+  --secondary-color: #112D4E;
+  --light-bg: #F9F7F7;
+  --accent-bg: #DBE2EF;
+  --text-dark: #112D4E;
+  --text-light: #ffffff;
+}
+
+/* Override Bootstrap Primary Colors */
+.bg-primary {
+  background-color: #3F72AF !important;
+}
+
+.btn-primary {
+  background-color: #3F72AF !important;
+  border-color: #3F72AF !important;
+}
+
+.btn-primary:hover {
+  background-color: #2e5a94 !important;
+  border-color: #2e5a94 !important;
+}
+
+.text-primary {
+  color: #3F72AF !important;
+}
+
+.border-left-primary {
+  border-left-color: #3F72AF !important;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  background: linear-gradient(180deg, #112D4E 0%, #3F72AF 100%) !important;
+}
+
+.sidebar .sidebar-brand {
+  background-color: rgba(17, 45, 78, 0.1) !important;
+}
+
+.sidebar .nav-item .nav-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.sidebar .nav-item .nav-link:hover {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.sidebar .nav-item.active .nav-link {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.sidebar hr.sidebar-divider {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.sidebar .sidebar-heading {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Topbar Styling */
+.topbar {
+  background-color: #F9F7F7 !important;
+  border-bottom: 1px solid #DBE2EF !important;
+}
+
+.topbar .nav-item .nav-link {
+  color: #112D4E !important;
+}
+
+.topbar .nav-item .nav-link:hover {
+  color: #3F72AF !important;
+}
+
+.topbar .dropdown-list .dropdown-header {
+  background-color: #3F72AF !important;
+  border-color: #3F72AF !important;
+}
+
+/* Content Wrapper */
+#content-wrapper {
+  background-color: #F9F7F7 !important;
+}
+
+/* Cards */
+.card {
+  border: 1px solid #DBE2EF !important;
+  background-color: #ffffff !important;
+}
+
+.card-header {
+  background-color: #DBE2EF !important;
+  border-bottom: 1px solid #DBE2EF !important;
+  color: #112D4E !important;
+}
+
+/* Tables */
+.table {
+  color: #112D4E !important;
+}
+
+.table thead th {
+  background-color: #DBE2EF !important;
+  color: #112D4E !important;
+  border-color: #DBE2EF !important;
+}
+
+.table td, .table th {
+  border-color: #DBE2EF !important;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(219, 226, 239, 0.3) !important;
+}
+
+/* Badges */
+.badge-primary {
+  background-color: #3F72AF !important;
+}
+
+.badge-secondary {
+  background-color: #112D4E !important;
+}
+
+.badge-success {
+  background-color: #28a745 !important;
+}
+
+.badge-warning {
+  background-color: #ffc107 !important;
+}
+
+.badge-danger {
+  background-color: #dc3545 !important;
+}
+
+.badge-info {
+  background-color: #17a2b8 !important;
+}
+
+/* Forms */
+.form-control {
+  border-color: #DBE2EF !important;
+  color: #112D4E !important;
+}
+
+.form-control:focus {
+  border-color: #3F72AF !important;
+  box-shadow: 0 0 0 0.2rem rgba(63, 114, 175, 0.25) !important;
+}
+
+/* Buttons */
+.btn-secondary {
+  background-color: #112D4E !important;
+  border-color: #112D4E !important;
+}
+
+.btn-secondary:hover {
+  background-color: #0d1f35 !important;
+  border-color: #0d1f35 !important;
+}
+
+.btn-outline-primary {
+  color: #3F72AF !important;
+  border-color: #3F72AF !important;
+}
+
+.btn-outline-primary:hover {
+  background-color: #3F72AF !important;
+  border-color: #3F72AF !important;
+}
+
+/* Progress Bars */
+.progress-bar {
+  background-color: #3F72AF !important;
+}
+
+/* Alerts */
+.alert-primary {
+  background-color: rgba(63, 114, 175, 0.1) !important;
+  border-color: #3F72AF !important;
+  color: #112D4E !important;
+}
+
+.alert-secondary {
+  background-color: rgba(17, 45, 78, 0.1) !important;
+  border-color: #112D4E !important;
+  color: #112D4E !important;
+}
+
+/* Pagination */
+.page-link {
+  color: #3F72AF !important;
+}
+
+.page-link:hover {
+  color: #2e5a94 !important;
+  background-color: #DBE2EF !important;
+  border-color: #DBE2EF !important;
+}
+
+.page-item.active .page-link {
+  background-color: #3F72AF !important;
+  border-color: #3F72AF !important;
+}
+
+/* Dropdown */
+.dropdown-menu {
+  border-color: #DBE2EF !important;
+}
+
+.dropdown-item:hover {
+  background-color: #DBE2EF !important;
+  color: #112D4E !important;
+}
+
+/* Modal */
+.modal-header {
+  background: linear-gradient(45deg, #3F72AF, #112D4E) !important;
+  color: white !important;
+}
+
+/* Custom Status Colors */
+.text-success {
+  color: #28a745 !important;
+}
+
+.text-warning {
+  color: #ffc107 !important;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+}
+
+.text-info {
+  color: #17a2b8 !important;
+}
+
+/* Background Gradients */
+.bg-gradient-primary {
+  background: linear-gradient(180deg, #3F72AF 10%, #2e5a94 100%) !important;
+}
+
+.bg-gradient-secondary {
+  background: linear-gradient(180deg, #112D4E 10%, #0d1f35 100%) !important;
+}
+
+/* Icon Colors */
+.fas, .far, .fab {
+  color: #3F72AF;
+}
+
+.sidebar .fas, .sidebar .far, .sidebar .fab {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* DataTables */
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  background: #3F72AF !important;
+  border-color: #3F72AF !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background: #DBE2EF !important;
+  border-color: #DBE2EF !important;
+  color: #112D4E !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F9F7F7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #DBE2EF;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3F72AF;
+}
