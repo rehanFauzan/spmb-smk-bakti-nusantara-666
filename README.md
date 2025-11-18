@@ -1,7 +1,7 @@
 # SPMB SMK BAKTI NUSANTARA 666
 
 <p align="center">
-  <img src="https://via.placeholder.com/400x150/2563eb/ffffff?text=SMK+BAKTI+NUSANTARA+666" alt="SMK BAKTI NUSANTARA 666 Logo">
+  <img src="public/assets/img/baknus/bn2.png" alt="SMK BAKTI NUSANTARA 666 Logo">
 </p>
 
 <p align="center">
@@ -116,4 +116,7 @@ Sistem SPMB SMK BAKTI NUSANTARA 666 ini adalah software open-source yang dilisen
 ---
 
 **SMK BAKTI NUSANTARA 666**  
-*"Membangun Generasi Unggul untuk Masa Depan Bangsa"*
+*"SANTUN JUJUR TAAT"*
+
+
+[def]: ssets
