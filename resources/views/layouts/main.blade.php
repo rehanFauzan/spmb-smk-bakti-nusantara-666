@@ -6,6 +6,7 @@
   <title>@yield('title', 'SPMB SMK BAKTI NUSANTARA 666')</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <link href="{{ asset('assets/img/baknus/bn2.png') }}" rel="icon">
   <link href="{{ asset('assets/img/baknus/bn2.png') }}" rel="apple-touch-icon">

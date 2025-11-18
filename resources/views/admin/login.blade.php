@@ -80,6 +80,15 @@
                 <i class="bi bi-box-arrow-in-right me-2"></i>Login
               </button>
             </div>
+
+            <div class="text-center mt-3">
+              <p class="mb-0 small text-muted">
+                Dengan masuk, Anda menyetujui 
+                <a href="{{ route('syarat-ketentuan') }}" class="text-decoration-none" target="_blank">Syarat & Ketentuan</a> 
+                dan 
+                <a href="{{ route('kebijakan-privasi') }}" class="text-decoration-none" target="_blank">Kebijakan Privasi</a>
+              </p>
+            </div>
           </form>
         </div>
 

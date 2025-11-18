@@ -14,17 +14,23 @@ class OtpMail extends Mailable
 
     public $otp;
     public $nama;
+    public $purpose;
 
-    public function __construct($otp, $nama)
+    public function __construct($otp, $nama, $purpose = 'Pendaftaran')
     {
         $this->otp = $otp;
         $this->nama = $nama;
+        $this->purpose = $purpose;
     }
 
     public function envelope(): Envelope
     {
+        $subject = $this->purpose === 'Reset Password' 
+            ? 'Kode OTP Reset Password - SMK BAKTI NUSANTARA 666'
+            : 'Kode OTP Pendaftaran - SMK BAKTI NUSANTARA 666';
+            
         return new Envelope(
-            subject: 'Kode OTP Pendaftaran - SMK BAKTI NUSANTARA 666',
+            subject: $subject,
         );
     }
 

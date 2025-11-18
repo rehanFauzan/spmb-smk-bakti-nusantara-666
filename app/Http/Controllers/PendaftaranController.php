@@ -581,6 +581,127 @@ class PendaftaranController extends Controller
     }
 
     /**
+     * Tampilkan halaman lupa password
+     */
+    public function showForgotPassword()
+    {
+        return view('pendaftaran.forgot-password');
+    }
+
+    /**
+     * Kirim OTP reset password
+     */
+    public function sendResetLink(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email'
+        ], [
+            'email.required' => 'Email wajib diisi',
+            'email.email' => 'Format email tidak valid',
+            'email.exists' => 'Email tidak terdaftar dalam sistem'
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        
+        // Generate OTP untuk reset password
+        $otpRecord = Otp::generateOtp($request->email);
+        
+        try {
+            Mail::to($request->email)->send(new OtpMail($otpRecord->otp, $user->name, 'Reset Password'));
+        } catch (\Exception $e) {
+            \Log::error('Failed to send reset password OTP: ' . $e->getMessage());
+            return back()->withErrors(['email' => 'Gagal mengirim OTP reset password']);
+        }
+
+        // Simpan email di session untuk verifikasi OTP
+        session(['reset_password_email' => $request->email]);
+
+        return redirect()->route('pendaftaran.reset-password')
+            ->with('success', 'Kode OTP untuk reset password telah dikirim ke email Anda');
+    }
+
+    /**
+     * Tampilkan halaman reset password dengan OTP
+     */
+    public function showResetPassword()
+    {
+        $email = session('reset_password_email');
+        
+        if (!$email) {
+            return redirect()->route('pendaftaran.forgot-password')
+                ->with('error', 'Silakan request OTP reset password terlebih dahulu');
+        }
+
+        return view('pendaftaran.reset-password', compact('email'));
+    }
+
+    /**
+     * Reset password dengan OTP
+     */
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'otp' => 'required|string|size:6',
+            'password' => ['required', 'confirmed', Password::min(8)]
+        ], [
+            'otp.required' => 'Kode OTP wajib diisi',
+            'otp.size' => 'Kode OTP harus 6 digit',
+            'password.confirmed' => 'Konfirmasi password tidak cocok',
+            'password.min' => 'Password minimal 8 karakter'
+        ]);
+
+        $email = session('reset_password_email');
+        if (!$email) {
+            return redirect()->route('pendaftaran.forgot-password')
+                ->with('error', 'Session expired. Silakan request OTP baru');
+        }
+
+        // Verifikasi OTP
+        if (!Otp::verifyOtp($email, $request->otp)) {
+            return back()->withErrors(['otp' => 'Kode OTP tidak valid atau sudah kadaluarsa']);
+        }
+
+        // Update password
+        User::where('email', $email)->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+        // Hapus session
+        session()->forget('reset_password_email');
+
+        return redirect()->route('pendaftaran.login')
+            ->with('success', 'Password berhasil direset. Silakan login dengan password baru');
+    }
+
+    /**
+     * Kirim ulang OTP reset password
+     */
+    public function resendResetOtp(Request $request)
+    {
+        $email = session('reset_password_email');
+        if (!$email) {
+            return redirect()->route('pendaftaran.forgot-password')
+                ->with('error', 'Session expired. Silakan request OTP baru');
+        }
+
+        $user = User::where('email', $email)->first();
+        $otpRecord = Otp::generateOtp($email);
+        
+        try {
+            Mail::to($email)->send(new OtpMail($otpRecord->otp, $user->name, 'Reset Password'));
+        } catch (\Exception $e) {
+            \Log::error('Failed to resend reset password OTP: ' . $e->getMessage());
+            return back()->withErrors(['email' => 'Gagal mengirim OTP']);
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json(['success' => true, 'message' => 'Kode OTP baru telah dikirim ke email Anda']);
+        }
+        
+        return back()->with('success', 'Kode OTP baru telah dikirim ke email Anda');
+    }
+
+    /**
      * Logout
      */
     public function logout(Request $request)

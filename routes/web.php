@@ -25,6 +25,8 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/about', function () { return view('about'); });
 Route::get('/contact', function () { return view('contact'); });
 Route::get('/jurusan', function () { return view('jurusan'); });
+Route::get('/syarat-ketentuan', function () { return view('syarat-ketentuan'); })->name('syarat-ketentuan');
+Route::get('/kebijakan-privasi', function () { return view('kebijakan-privasi'); })->name('kebijakan-privasi');
 // Pendaftaran Routes
 Route::get('/pendaftaran', [PendaftaranController::class, 'index'])->name('pendaftaran.index');
 Route::get('/pendaftaran/register', [PendaftaranController::class, 'showRegister'])->name('pendaftaran.register');
@@ -34,6 +36,11 @@ Route::post('/pendaftaran/verify-otp', [PendaftaranController::class, 'verifyOtp
 Route::post('/pendaftaran/resend-otp', [PendaftaranController::class, 'resendOtp'])->name('pendaftaran.resend-otp');
 Route::get('/pendaftaran/login', [PendaftaranController::class, 'showLogin'])->name('pendaftaran.login');
 Route::post('/pendaftaran/login', [PendaftaranController::class, 'storeLogin'])->name('pendaftaran.login.store');
+Route::get('/pendaftaran/forgot-password', [PendaftaranController::class, 'showForgotPassword'])->name('pendaftaran.forgot-password');
+Route::post('/pendaftaran/forgot-password', [PendaftaranController::class, 'sendResetLink'])->name('pendaftaran.forgot-password.send');
+Route::get('/pendaftaran/reset-password', [PendaftaranController::class, 'showResetPassword'])->name('pendaftaran.reset-password');
+Route::post('/pendaftaran/reset-password', [PendaftaranController::class, 'resetPassword'])->name('pendaftaran.reset-password.store');
+Route::post('/pendaftaran/resend-reset-otp', [PendaftaranController::class, 'resendResetOtp'])->name('pendaftaran.resend-reset-otp');
 Route::get('/pendaftaran/form', [PendaftaranController::class, 'showForm'])->name('pendaftaran.form')->middleware('gelombang.aktif');
 Route::post('/pendaftaran/form', [PendaftaranController::class, 'storeForm'])->name('pendaftaran.form.store')->middleware('gelombang.aktif');
 Route::get('/pendaftaran/upload', [PendaftaranController::class, 'showUpload'])->name('pendaftaran.upload');

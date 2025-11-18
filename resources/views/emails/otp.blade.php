@@ -24,7 +24,11 @@
         <div class="content">
             <h2>Halo, {{ $nama }}!</h2>
             
-            <p>Terima kasih telah mendaftar di SMK BAKTI NUSANTARA 666. Untuk melanjutkan proses pendaftaran, silakan gunakan kode OTP berikut:</p>
+            @if($purpose === 'Reset Password')
+                <p>Kami menerima permintaan untuk reset password akun Anda. Untuk melanjutkan proses reset password, silakan gunakan kode OTP berikut:</p>
+            @else
+                <p>Terima kasih telah mendaftar di SMK BAKTI NUSANTARA 666. Untuk melanjutkan proses pendaftaran, silakan gunakan kode OTP berikut:</p>
+            @endif
             
             <div class="otp-box">
                 <div class="otp-code">{{ $otp }}</div>
@@ -35,7 +39,11 @@
             <ul>
                 <li>Jangan berikan kode OTP ini kepada siapapun</li>
                 <li>Kode OTP hanya berlaku selama 5 menit</li>
-                <li>Jika tidak melakukan pendaftaran, abaikan email ini</li>
+                @if($purpose === 'Reset Password')
+                    <li>Jika tidak meminta reset password, abaikan email ini</li>
+                @else
+                    <li>Jika tidak melakukan pendaftaran, abaikan email ini</li>
+                @endif
             </ul>
             
             <p>Jika Anda mengalami kesulitan, silakan hubungi kami di:</p>

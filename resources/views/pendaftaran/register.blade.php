@@ -161,8 +161,8 @@
             <div class="form-check mb-4">
               <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
               <label class="form-check-label" for="terms">
-                Saya menyetujui <a href="{{ url('/terms') }}" target="_blank">Syarat dan Ketentuan</a> 
-                serta <a href="{{ url('/privacy') }}" target="_blank">Kebijakan Privasi</a>
+                Saya menyetujui <a href="{{ route('syarat-ketentuan') }}" target="_blank">Syarat dan Ketentuan</a> 
+                serta <a href="{{ route('kebijakan-privasi') }}" target="_blank">Kebijakan Privasi</a>
               </label>
             </div>
 

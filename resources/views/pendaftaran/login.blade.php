@@ -110,10 +110,16 @@
 
             <div class="text-center mt-3">
               <p class="mb-2">
-                <a href="#" class="text-decoration-none">Lupa password?</a>
+                <a href="{{ route('pendaftaran.forgot-password') }}" class="text-decoration-none">Lupa password?</a>
               </p>
-              <p class="mb-0">Belum punya akun? 
+              <p class="mb-2">Belum punya akun? 
                 <a href="{{ route('pendaftaran.register') }}" class="text-decoration-none">Daftar di sini</a>
+              </p>
+              <p class="mb-0 small text-muted">
+                Dengan masuk, Anda menyetujui 
+                <a href="{{ route('syarat-ketentuan') }}" class="text-decoration-none" target="_blank">Syarat & Ketentuan</a> 
+                dan 
+                <a href="{{ route('kebijakan-privasi') }}" class="text-decoration-none" target="_blank">Kebijakan Privasi</a>
               </p>
             </div>
           </form>
