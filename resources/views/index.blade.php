@@ -20,7 +20,7 @@
               <div class="floating-card stats-card" data-aos="fade-up" data-aos-delay="400">
                 <div class="stat-item">
                   <span class="number">1500+</span>
-                  <span class="label">Siswa Aktif</span>
+                  <span class="label">Siswa tolol</span>
                 </div>
                 <div class="stat-item">
                   <span class="number">95%</span>
