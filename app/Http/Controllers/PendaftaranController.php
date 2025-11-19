@@ -257,6 +257,7 @@ class PendaftaranController extends Controller
             'nama_ayah' => 'required|string',
             'nama_ibu' => 'required|string',
             'alamat' => 'required|string',
+            'agama' => 'required|in:Islam,Kristen,Katolik,Hindu,Buddha,Konghucu',
             'latitude' => 'nullable|numeric|between:-90,90',
             'longitude' => 'nullable|numeric|between:-180,180',
         ]);
@@ -308,6 +309,7 @@ class PendaftaranController extends Controller
             'nik' => $request->nisn ?? '0000000000000000',
             'nama' => Auth::user()->name,
             'jk' => $request->jenis_kelamin ?? 'L',
+            'agama' => $request->agama,
             'tmp_lahir' => $request->tanggal_lahir ?? now()->subYears(15),
             'alamat' => $request->alamat ?? '',
             'wilayah_id' => $wilayahId ?? 1,

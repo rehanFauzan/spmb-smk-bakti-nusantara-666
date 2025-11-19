@@ -139,41 +139,35 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="row justify-content-center">
             <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
               <div class="specialty-item">
                 <i class="bi bi-laptop"></i>
-                <span>RPL</span>
+                <span>PPLG</span>
               </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="150">
               <div class="specialty-item">
-                <i class="bi bi-router"></i>
-                <span>TKJ</span>
+                <i class="bi bi-palette"></i>
+                <span>DKV</span>
               </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="200">
               <div class="specialty-item">
-                <i class="bi bi-camera-video"></i>
-                <span>Multimedia</span>
+                <i class="bi bi-play-circle"></i>
+                <span>Animasi</span>
               </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="250">
               <div class="specialty-item">
-                <i class="bi bi-calculator"></i>
-                <span>Akuntansi</span>
+                <i class="bi bi-broadcast"></i>
+                <span>BDP</span>
               </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="300">
               <div class="specialty-item">
-                <i class="bi bi-file-text"></i>
-                <span>Adm. Perkantoran</span>
-              </div>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="350">
-              <div class="specialty-item">
-                <i class="bi bi-book"></i>
-                <span>Mata Pelajaran Umum</span>
+                <i class="bi bi-calculator"></i>
+                <span>Akuntansi</span>
               </div>
             </div>
           </div>
@@ -205,7 +199,7 @@
               </div>
               <div class="col-lg-3">
                 <label class="form-label mb-1">Program Keahlian</label>
-                <select class="form-select">
+                <select class="form-select" id="program-filter">
                   <option value="*">Semua Program</option>
                   <option value=".filter-pplg">PPLG</option>
                   <option value=".filter-akuntansi">Akuntansi</option>
@@ -244,7 +238,7 @@
               <div class="col-lg-3 col-md-6 doctor-item isotope-item filter-pplg">
                 <article class="doctor-card h-100">
                   <figure class="doctor-media">
-                    <img src="{{ asset('assets/img/health/staff-3.webp') }}" class="img-fluid" alt="Pak Budi Santoso" loading="lazy">
+                    <img src="{{ asset('assets/img/baknus/ajipplg.png') }}" class="img-fluid" alt="Pak Budi Santoso" loading="lazy">
                     <span class="tag">Kepala Program</span>
                   </figure>
                   <div class="doctor-content">
@@ -265,7 +259,7 @@
               <div class="col-lg-3 col-md-6 doctor-item isotope-item filter-akuntansi">
                 <article class="doctor-card h-100">
                   <figure class="doctor-media">
-                    <img src="{{ asset('assets/img/health/staff-5.webp') }}" class="img-fluid" alt="Bu Rina Kartika" loading="lazy">
+                    <img src="{{ asset('assets/img/baknus/elinaakt.jpg') }}" class="img-fluid" alt="Bu Rina Kartika" loading="lazy">
                   </figure>
                   <div class="doctor-content">
                     <h3 class="doctor-name">Bu Rina Kartika, S.E, M.Ak</h3>
@@ -285,7 +279,7 @@
               <div class="col-lg-3 col-md-6 doctor-item isotope-item filter-dkv">
                 <article class="doctor-card h-100">
                   <figure class="doctor-media">
-                    <img src="{{ asset('assets/img/health/staff-12.webp') }}" class="img-fluid" alt="Pak Ahmad Fauzi" loading="lazy">
+                    <img src="{{ asset('assets/img/baknus/radeadkv.jpg') }}" class="img-fluid" alt="Pak Ahmad Fauzi" loading="lazy">
                   </figure>
                   <div class="doctor-content">
                     <h3 class="doctor-name">Pak Ahmad Fauzi, S.Sn, M.Ds</h3>
@@ -305,7 +299,7 @@
               <div class="col-lg-3 col-md-6 doctor-item isotope-item filter-animasi">
                 <article class="doctor-card h-100">
                   <figure class="doctor-media">
-                    <img src="{{ asset('assets/img/health/staff-7.webp') }}" class="img-fluid" alt="Bu Sari Indrawati" loading="lazy">
+                    <img src="{{ asset('assets/img/baknus/sifaanm.webp') }}" class="img-fluid" alt="Bu Sari Indrawati" loading="lazy">
                   </figure>
                   <div class="doctor-content">
                     <h3 class="doctor-name">Bu Sari Indrawati, S.Sn, M.Ds</h3>
@@ -325,7 +319,7 @@
               <div class="col-lg-3 col-md-6 doctor-item isotope-item filter-pemasaran">
                 <article class="doctor-card h-100">
                   <figure class="doctor-media">
-                    <img src="{{ asset('assets/img/health/staff-10.webp') }}" class="img-fluid" alt="Bu Dewi Sartika" loading="lazy">
+                    <img src="{{ asset('assets/img/baknus/robingahbdp.jpg') }}" class="img-fluid" alt="Bu Dewi Sartika" loading="lazy">
                   </figure>
                   <div class="doctor-content">
                     <h3 class="doctor-name">Bu Dewi Sartika, S.E, M.M</h3>
@@ -392,5 +386,52 @@
       justify-content: flex-start !important;
     }
     </style>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Dropdown filter functionality
+        const programFilter = document.getElementById('program-filter');
+        const filterButtons = document.querySelectorAll('.isotope-filters li');
+        
+        if (programFilter) {
+            programFilter.addEventListener('change', function() {
+                const selectedFilter = this.value;
+                
+                // Update active filter button
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('filter-active');
+                    if (btn.getAttribute('data-filter') === selectedFilter) {
+                        btn.classList.add('filter-active');
+                    }
+                });
+                
+                // Trigger isotope filter
+                if (window.GLightbox && window.GLightbox.isotope) {
+                    window.GLightbox.isotope.arrange({ filter: selectedFilter });
+                } else {
+                    // Fallback manual filter
+                    const items = document.querySelectorAll('.doctor-item');
+                    items.forEach(item => {
+                        if (selectedFilter === '*' || item.classList.contains(selectedFilter.replace('.', ''))) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        }
+        
+        // Sync filter buttons with dropdown
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const filter = this.getAttribute('data-filter');
+                if (programFilter) {
+                    programFilter.value = filter;
+                }
+            });
+        });
+    });
+    </script>
 
 @endsection

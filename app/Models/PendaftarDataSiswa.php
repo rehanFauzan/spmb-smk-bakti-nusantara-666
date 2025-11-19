@@ -23,6 +23,7 @@ class PendaftarDataSiswa extends Model
         'nik',
         'nama',
         'jk',
+        'agama',
         'tmp_lahir',
         'alamat',
         'wilayah_id',

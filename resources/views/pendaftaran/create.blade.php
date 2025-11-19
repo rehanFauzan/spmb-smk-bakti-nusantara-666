@@ -173,6 +173,22 @@
                   @enderror
                 </div>
                 
+                <div class="col-md-6">
+                  <label class="form-label">Agama <span class="text-danger">*</span></label>
+                  <select name="agama" class="form-select @error('agama') is-invalid @enderror" required>
+                    <option value="">Pilih Agama</option>
+                    <option value="Islam" {{ old('agama', $pendaftarSiswa->agama ?? '') == 'Islam' ? 'selected' : '' }}>Islam</option>
+                    <option value="Kristen" {{ old('agama', $pendaftarSiswa->agama ?? '') == 'Kristen' ? 'selected' : '' }}>Kristen</option>
+                    <option value="Katolik" {{ old('agama', $pendaftarSiswa->agama ?? '') == 'Katolik' ? 'selected' : '' }}>Katolik</option>
+                    <option value="Hindu" {{ old('agama', $pendaftarSiswa->agama ?? '') == 'Hindu' ? 'selected' : '' }}>Hindu</option>
+                    <option value="Buddha" {{ old('agama', $pendaftarSiswa->agama ?? '') == 'Buddha' ? 'selected' : '' }}>Buddha</option>
+                    <option value="Konghucu" {{ old('agama', $pendaftarSiswa->agama ?? '') == 'Konghucu' ? 'selected' : '' }}>Konghucu</option>
+                  </select>
+                  @error('agama')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+                
                 <div class="col-md-12">
                   <label class="form-label">Alamat Lengkap <span class="text-danger">*</span></label>
                   <textarea name="alamat" 
