@@ -82,6 +82,9 @@ class AuthController extends Controller
         }
         
         Session::flush();
-        return redirect()->route('admin.login');
+        return redirect()->route('admin.login')
+            ->header('Cache-Control', 'no-cache, no-store, must-revalidate')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', '0');
     }
 }

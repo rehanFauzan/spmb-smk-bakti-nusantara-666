@@ -75,6 +75,16 @@
             });
         });
     </script>
+    
+    <script>
+    // Auto refresh when back button is pressed
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    });
+    </script>
+    
     @stack('scripts')
 </body>
 </html>

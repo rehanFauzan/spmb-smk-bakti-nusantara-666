@@ -53,6 +53,17 @@
 
   <script src="{{ asset('assets/js/main.js') }}"></script>
   
+  @if(request()->routeIs('pendaftaran.form', 'pendaftaran.upload', 'pendaftaran.status', 'pendaftaran.hasil', 'pendaftaran.pembayaran'))
+  <script>
+    // Auto refresh when back button is pressed
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    });
+  </script>
+  @endif
+  
   @stack('scripts')
 
 </body>

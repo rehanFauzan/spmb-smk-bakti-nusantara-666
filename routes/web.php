@@ -41,18 +41,18 @@ Route::post('/pendaftaran/forgot-password', [PendaftaranController::class, 'send
 Route::get('/pendaftaran/reset-password', [PendaftaranController::class, 'showResetPassword'])->name('pendaftaran.reset-password');
 Route::post('/pendaftaran/reset-password', [PendaftaranController::class, 'resetPassword'])->name('pendaftaran.reset-password.store');
 Route::post('/pendaftaran/resend-reset-otp', [PendaftaranController::class, 'resendResetOtp'])->name('pendaftaran.resend-reset-otp');
-Route::get('/pendaftaran/form', [PendaftaranController::class, 'showForm'])->name('pendaftaran.form')->middleware('gelombang.aktif');
-Route::post('/pendaftaran/form', [PendaftaranController::class, 'storeForm'])->name('pendaftaran.form.store')->middleware('gelombang.aktif');
-Route::get('/pendaftaran/upload', [PendaftaranController::class, 'showUpload'])->name('pendaftaran.upload');
-Route::post('/pendaftaran/upload', [PendaftaranController::class, 'storeUpload'])->name('pendaftaran.upload.store');
-Route::get('/pendaftaran/status', [PendaftaranController::class, 'showStatus'])->name('pendaftaran.status');
-Route::get('/pendaftaran/hasil', [PendaftaranController::class, 'showHasil'])->name('pendaftaran.hasil');
-Route::get('/pendaftaran/pembayaran', [PendaftaranController::class, 'showPembayaran'])->name('pendaftaran.pembayaran');
-Route::post('/pendaftaran/pembayaran', [PendaftaranController::class, 'storePembayaran'])->name('pendaftaran.pembayaran.store');
+Route::get('/pendaftaran/form', [PendaftaranController::class, 'showForm'])->name('pendaftaran.form')->middleware(['gelombang.aktif', 'prevent.back']);
+Route::post('/pendaftaran/form', [PendaftaranController::class, 'storeForm'])->name('pendaftaran.form.store')->middleware(['gelombang.aktif', 'prevent.back']);
+Route::get('/pendaftaran/upload', [PendaftaranController::class, 'showUpload'])->name('pendaftaran.upload')->middleware('prevent.back');
+Route::post('/pendaftaran/upload', [PendaftaranController::class, 'storeUpload'])->name('pendaftaran.upload.store')->middleware('prevent.back');
+Route::get('/pendaftaran/status', [PendaftaranController::class, 'showStatus'])->name('pendaftaran.status')->middleware('prevent.back');
+Route::get('/pendaftaran/hasil', [PendaftaranController::class, 'showHasil'])->name('pendaftaran.hasil')->middleware('prevent.back');
+Route::get('/pendaftaran/pembayaran', [PendaftaranController::class, 'showPembayaran'])->name('pendaftaran.pembayaran')->middleware('prevent.back');
+Route::post('/pendaftaran/pembayaran', [PendaftaranController::class, 'storePembayaran'])->name('pendaftaran.pembayaran.store')->middleware('prevent.back');
 Route::post('/pendaftaran/logout', [PendaftaranController::class, 'logout'])->name('pendaftaran.logout');
 
 // Admin Routes
-Route::prefix('admin')->middleware('admin')->group(function () {
+Route::prefix('admin')->middleware(['admin', 'prevent.back'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     
     // Data Master
@@ -99,7 +99,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 });
 
 // Panitia Routes
-Route::prefix('panitia')->group(function () {
+Route::prefix('panitia')->middleware('prevent.back')->group(function () {
     Route::get('/dashboard', [PanitiaController::class, 'dashboard'])->name('panitia.dashboard');
     Route::get('/pendaftaran', [PanitiaController::class, 'pendaftaran'])->name('panitia.pendaftaran');
     Route::get('/verifikasi-berkas', [PanitiaController::class, 'verifikasiBerkas'])->name('panitia.verifikasi-berkas');
@@ -108,7 +108,7 @@ Route::prefix('panitia')->group(function () {
 });
 
 // Keuangan Routes
-Route::prefix('keuangan')->group(function () {
+Route::prefix('keuangan')->middleware('prevent.back')->group(function () {
     Route::get('/dashboard', [KeuanganController::class, 'dashboard'])->name('keuangan.dashboard');
     Route::get('/verifikasi-pembayaran', [KeuanganController::class, 'verifikasiPembayaran'])->name('keuangan.verifikasi-pembayaran');
     Route::put('/verifikasi-pembayaran/{id}', [KeuanganController::class, 'updateStatusPembayaran'])->name('keuangan.update-status-pembayaran');
@@ -119,7 +119,7 @@ Route::prefix('keuangan')->group(function () {
 });
 
 // Kepala Sekolah Routes
-Route::prefix('kepala-sekolah')->group(function () {
+Route::prefix('kepala-sekolah')->middleware('prevent.back')->group(function () {
     Route::get('/dashboard', [KepalaSekolahController::class, 'dashboard'])->name('kepala-sekolah.dashboard');
     Route::get('/calon-siswa', [KepalaSekolahController::class, 'daftarCalonSiswa'])->name('kepala-sekolah.calon-siswa');
     Route::get('/siswa-diterima', [KepalaSekolahController::class, 'calonSiswaDiterima'])->name('kepala-sekolah.siswa-diterima');
@@ -146,3 +146,9 @@ Route::prefix('laporan')->group(function () {
 
 // API Routes
 Route::get('/api/wilayah', [PublicWilayahController::class, 'getWilayahData'])->name('api.wilayah');
+Route::get('/api/auth-check', function() {
+    return response()->json(['authenticated' => auth()->check()]);
+})->name('api.auth-check');
+Route::get('/api/admin-auth-check', function() {
+    return response()->json(['authenticated' => auth()->check() && auth()->user()->role === 'admin']);
+})->name('api.admin-auth-check');

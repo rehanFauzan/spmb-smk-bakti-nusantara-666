@@ -749,6 +749,9 @@ class PendaftaranController extends Controller
         $request->session()->regenerateToken();
         
         return redirect()->route('pendaftaran.index')
-            ->with('success', 'Anda telah logout.');
+            ->with('success', 'Anda telah logout.')
+            ->header('Cache-Control', 'no-cache, no-store, must-revalidate')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', '0');
     }
 }
