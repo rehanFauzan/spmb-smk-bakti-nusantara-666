@@ -202,23 +202,39 @@
                              id="bukti_bayar"
                              class="file-input @error('bukti_bayar') is-invalid @enderror" 
                              accept=".pdf,.jpg,.jpeg,.png"
-                             required>
-                      <div class="upload-content">
+                             {{ !isset($buktiBayar) ? 'required' : '' }}>
+                      @if(isset($buktiBayar))
+                        <div class="file-preview" style="display: flex;">
+                          <i class="bi bi-file-earmark-check text-success"></i>
+                          <span class="file-name">{{ $buktiBayar->nama_file }}</span>
+                          <span class="badge bg-success ms-2">Sudah diupload</span>
+                        </div>
+                        <div class="upload-content" style="display: none;">
+                      @else
+                        <div class="upload-content">
+                      @endif
                         <i class="bi bi-cloud-upload upload-icon"></i>
-                        <p class="upload-text">Klik atau drag file ke sini</p>
+                        <p class="upload-text">{{ isset($buktiBayar) ? 'Klik untuk mengganti bukti pembayaran' : 'Klik atau drag file ke sini' }}</p>
                         <p class="upload-hint">PDF, JPG, PNG (Max: 2MB)</p>
                       </div>
-                      <div class="file-preview" style="display: none;">
-                        <i class="bi bi-file-earmark-check text-success"></i>
-                        <span class="file-name"></span>
-                        <button type="button" class="btn-remove">
-                          <i class="bi bi-x"></i>
-                        </button>
-                      </div>
+                      @if(!isset($buktiBayar))
+                        <div class="file-preview" style="display: none;">
+                          <i class="bi bi-file-earmark-check text-success"></i>
+                          <span class="file-name"></span>
+                          <button type="button" class="btn-remove">
+                            <i class="bi bi-x"></i>
+                          </button>
+                        </div>
+                      @endif
                     </div>
                     @error('bukti_bayar')
                       <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
+                    @if(isset($buktiBayar) && $buktiBayar->catatan)
+                      <div class="mt-2">
+                        <small class="text-muted">Catatan: {{ $buktiBayar->catatan }}</small>
+                      </div>
+                    @endif
                   </div>
 
                   <!-- Form Actions -->

@@ -111,19 +111,30 @@
                              id="berkas_ijazah"
                              class="file-input @error('berkas_ijazah') is-invalid @enderror" 
                              accept=".pdf,.jpg,.jpeg,.png"
-                             required>
-                      <div class="upload-content">
+                             {{ !isset($berkas['IJAZAH']) ? 'required' : '' }}>
+                      @if(isset($berkas['IJAZAH']))
+                        <div class="file-preview" style="display: flex;">
+                          <i class="bi bi-file-earmark-check text-success"></i>
+                          <span class="file-name">{{ $berkas['IJAZAH']->nama_file }}</span>
+                          <span class="badge bg-success ms-2">Sudah diupload</span>
+                        </div>
+                        <div class="upload-content" style="display: none;">
+                      @else
+                        <div class="upload-content">
+                      @endif
                         <i class="bi bi-cloud-upload upload-icon"></i>
-                        <p class="upload-text">Klik atau drag file ke sini</p>
+                        <p class="upload-text">{{ isset($berkas['IJAZAH']) ? 'Klik untuk mengganti file' : 'Klik atau drag file ke sini' }}</p>
                         <p class="upload-hint">PDF, JPG, PNG (Max: 2MB)</p>
                       </div>
-                      <div class="file-preview" style="display: none;">
-                        <i class="bi bi-file-earmark-check text-success"></i>
-                        <span class="file-name"></span>
-                        <button type="button" class="btn-remove">
-                          <i class="bi bi-x"></i>
-                        </button>
-                      </div>
+                      @if(!isset($berkas['IJAZAH']))
+                        <div class="file-preview" style="display: none;">
+                          <i class="bi bi-file-earmark-check text-success"></i>
+                          <span class="file-name"></span>
+                          <button type="button" class="btn-remove">
+                            <i class="bi bi-x"></i>
+                          </button>
+                        </div>
+                      @endif
                     </div>
                     @error('berkas_ijazah')
                       <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -150,19 +161,30 @@
                              id="berkas_kk"
                              class="file-input @error('berkas_kk') is-invalid @enderror" 
                              accept=".pdf,.jpg,.jpeg,.png"
-                             required>
-                      <div class="upload-content">
+                             {{ !isset($berkas['KK']) ? 'required' : '' }}>
+                      @if(isset($berkas['KK']))
+                        <div class="file-preview" style="display: flex;">
+                          <i class="bi bi-file-earmark-check text-success"></i>
+                          <span class="file-name">{{ $berkas['KK']->nama_file }}</span>
+                          <span class="badge bg-success ms-2">Sudah diupload</span>
+                        </div>
+                        <div class="upload-content" style="display: none;">
+                      @else
+                        <div class="upload-content">
+                      @endif
                         <i class="bi bi-cloud-upload upload-icon"></i>
-                        <p class="upload-text">Klik atau drag file ke sini</p>
+                        <p class="upload-text">{{ isset($berkas['KK']) ? 'Klik untuk mengganti file' : 'Klik atau drag file ke sini' }}</p>
                         <p class="upload-hint">PDF, JPG, PNG (Max: 2MB)</p>
                       </div>
-                      <div class="file-preview" style="display: none;">
-                        <i class="bi bi-file-earmark-check text-success"></i>
-                        <span class="file-name"></span>
-                        <button type="button" class="btn-remove">
-                          <i class="bi bi-x"></i>
-                        </button>
-                      </div>
+                      @if(!isset($berkas['KK']))
+                        <div class="file-preview" style="display: none;">
+                          <i class="bi bi-file-earmark-check text-success"></i>
+                          <span class="file-name"></span>
+                          <button type="button" class="btn-remove">
+                            <i class="bi bi-x"></i>
+                          </button>
+                        </div>
+                      @endif
                     </div>
                     @error('berkas_kk')
                       <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -189,19 +211,30 @@
                              id="berkas_akta"
                              class="file-input @error('berkas_akta') is-invalid @enderror" 
                              accept=".pdf,.jpg,.jpeg,.png"
-                             required>
-                      <div class="upload-content">
+                             {{ !isset($berkas['AKTA']) ? 'required' : '' }}>
+                      @if(isset($berkas['AKTA']))
+                        <div class="file-preview" style="display: flex;">
+                          <i class="bi bi-file-earmark-check text-success"></i>
+                          <span class="file-name">{{ $berkas['AKTA']->nama_file }}</span>
+                          <span class="badge bg-success ms-2">Sudah diupload</span>
+                        </div>
+                        <div class="upload-content" style="display: none;">
+                      @else
+                        <div class="upload-content">
+                      @endif
                         <i class="bi bi-cloud-upload upload-icon"></i>
-                        <p class="upload-text">Klik atau drag file ke sini</p>
+                        <p class="upload-text">{{ isset($berkas['AKTA']) ? 'Klik untuk mengganti file' : 'Klik atau drag file ke sini' }}</p>
                         <p class="upload-hint">PDF, JPG, PNG (Max: 2MB)</p>
                       </div>
-                      <div class="file-preview" style="display: none;">
-                        <i class="bi bi-file-earmark-check text-success"></i>
-                        <span class="file-name"></span>
-                        <button type="button" class="btn-remove">
-                          <i class="bi bi-x"></i>
-                        </button>
-                      </div>
+                      @if(!isset($berkas['AKTA']))
+                        <div class="file-preview" style="display: none;">
+                          <i class="bi bi-file-earmark-check text-success"></i>
+                          <span class="file-name"></span>
+                          <button type="button" class="btn-remove">
+                            <i class="bi bi-x"></i>
+                          </button>
+                        </div>
+                      @endif
                     </div>
                     @error('berkas_akta')
                       <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -228,19 +261,30 @@
                              id="pas_foto"
                              class="file-input @error('pas_foto') is-invalid @enderror" 
                              accept=".jpg,.jpeg,.png"
-                             required>
-                      <div class="upload-content">
+                             {{ !isset($berkas['PAS_FOTO']) ? 'required' : '' }}>
+                      @if(isset($berkas['PAS_FOTO']))
+                        <div class="file-preview" style="display: flex;">
+                          <i class="bi bi-file-earmark-check text-success"></i>
+                          <span class="file-name">{{ $berkas['PAS_FOTO']->nama_file }}</span>
+                          <span class="badge bg-success ms-2">Sudah diupload</span>
+                        </div>
+                        <div class="upload-content" style="display: none;">
+                      @else
+                        <div class="upload-content">
+                      @endif
                         <i class="bi bi-cloud-upload upload-icon"></i>
-                        <p class="upload-text">Klik atau drag file ke sini</p>
+                        <p class="upload-text">{{ isset($berkas['PAS_FOTO']) ? 'Klik untuk mengganti file' : 'Klik atau drag file ke sini' }}</p>
                         <p class="upload-hint">JPG, PNG (Max: 1MB)</p>
                       </div>
-                      <div class="file-preview" style="display: none;">
-                        <i class="bi bi-file-earmark-check text-success"></i>
-                        <span class="file-name"></span>
-                        <button type="button" class="btn-remove">
-                          <i class="bi bi-x"></i>
-                        </button>
-                      </div>
+                      @if(!isset($berkas['PAS_FOTO']))
+                        <div class="file-preview" style="display: none;">
+                          <i class="bi bi-file-earmark-check text-success"></i>
+                          <span class="file-name"></span>
+                          <button type="button" class="btn-remove">
+                            <i class="bi bi-x"></i>
+                          </button>
+                        </div>
+                      @endif
                     </div>
                     @error('pas_foto')
                       <div class="invalid-feedback d-block">{{ $message }}</div>

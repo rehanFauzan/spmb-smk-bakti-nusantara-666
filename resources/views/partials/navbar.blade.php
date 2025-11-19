@@ -17,7 +17,28 @@
       <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
     </nav>
 
-    <a class="btn-getstarted" href="{{ route('pendaftaran.login') }}">Login</a>
+    @auth
+      <div class="dropdown">
+        <a class="btn-getstarted dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-person-circle me-1"></i>{{ Auth::user()->name }}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="{{ route('pendaftaran.status') }}"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+          <li><a class="dropdown-item" href="{{ route('pendaftaran.form') }}"><i class="bi bi-file-earmark-text me-2"></i>Formulir</a></li>
+          <li><a class="dropdown-item" href="{{ route('pendaftaran.upload') }}"><i class="bi bi-cloud-upload me-2"></i>Upload Berkas</a></li>
+          <li><a class="dropdown-item" href="{{ route('pendaftaran.pembayaran') }}"><i class="bi bi-credit-card me-2"></i>Pembayaran</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <form action="{{ route('pendaftaran.logout') }}" method="POST" class="d-inline">
+              @csrf
+              <button type="submit" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right me-2"></i>Logout</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    @else
+      <a class="btn-getstarted" href="{{ route('pendaftaran.login') }}">Login</a>
+    @endauth
 
   </div>
 </header>

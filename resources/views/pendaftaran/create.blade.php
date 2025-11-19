@@ -128,7 +128,7 @@
                   <input type="text" 
                          name="nisn" 
                          class="form-control @error('nisn') is-invalid @enderror" 
-                         value="{{ old('nisn') }}"
+                         value="{{ old('nisn', $pendaftarSiswa->nik ?? '') }}"
                          placeholder="Nomor Induk Siswa Nasional" 
                          required>
                   @error('nisn')
@@ -141,7 +141,7 @@
                   <input type="text" 
                          name="tempat_lahir" 
                          class="form-control @error('tempat_lahir') is-invalid @enderror" 
-                         value="{{ old('tempat_lahir') }}"
+                         value="{{ old('tempat_lahir', $pendaftarSiswa->tmp_lahir ?? '') }}"
                          placeholder="Kota/Kabupaten tempat lahir" 
                          required>
                   @error('tempat_lahir')
@@ -154,7 +154,7 @@
                   <input type="date" 
                          name="tanggal_lahir" 
                          class="form-control @error('tanggal_lahir') is-invalid @enderror" 
-                         value="{{ old('tanggal_lahir') }}"
+                         value="{{ old('tanggal_lahir', $pendaftarSiswa ? \Carbon\Carbon::parse($pendaftarSiswa->tmp_lahir)->format('Y-m-d') : '') }}"
                          required>
                   @error('tanggal_lahir')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -165,8 +165,8 @@
                   <label class="form-label">Jenis Kelamin <span class="text-danger">*</span></label>
                   <select name="jenis_kelamin" class="form-select @error('jenis_kelamin') is-invalid @enderror" required>
                     <option value="">Pilih Jenis Kelamin</option>
-                    <option value="L" {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-laki</option>
-                    <option value="P" {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan</option>
+                    <option value="L" {{ old('jenis_kelamin', $pendaftarSiswa->jk ?? '') == 'L' ? 'selected' : '' }}>Laki-laki</option>
+                    <option value="P" {{ old('jenis_kelamin', $pendaftarSiswa->jk ?? '') == 'P' ? 'selected' : '' }}>Perempuan</option>
                   </select>
                   @error('jenis_kelamin')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -180,7 +180,7 @@
                             class="form-control @error('alamat') is-invalid @enderror" 
                             rows="3" 
                             placeholder="Jalan, RT/RW, Kelurahan, Kecamatan, Kota/Kabupaten" 
-                            required>{{ old('alamat') }}</textarea>
+                            required>{{ old('alamat', $pendaftarSiswa->alamat ?? '') }}</textarea>
                   @error('alamat')
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
@@ -197,8 +197,8 @@
                       </small>
                     </div>
                   </div>
-                  <input type="hidden" name="latitude" id="latitude" value="{{ old('latitude') }}">
-                  <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude') }}">
+                  <input type="hidden" name="latitude" id="latitude" value="{{ old('latitude', $pendaftarSiswa->lat ?? '') }}">
+                  <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude', $pendaftarSiswa->lng ?? '') }}">
                 </div>
               </div>
             </div>
@@ -221,7 +221,7 @@
                   <input type="text" 
                          name="asal_sekolah" 
                          class="form-control @error('asal_sekolah') is-invalid @enderror" 
-                         value="{{ old('asal_sekolah') }}"
+                         value="{{ old('asal_sekolah', $pendaftarSiswa->asal_sekolah ?? '') }}"
                          placeholder="Nama lengkap sekolah asal (SMP/MTs)" 
                          required>
                   @error('asal_sekolah')
@@ -319,7 +319,7 @@
                   <input type="text" 
                          name="nama_ayah" 
                          class="form-control @error('nama_ayah') is-invalid @enderror" 
-                         value="{{ old('nama_ayah') }}"
+                         value="{{ old('nama_ayah', $pendaftarSiswa->nama_ayah ?? '') }}"
                          placeholder="Nama lengkap ayah" 
                          required>
                   @error('nama_ayah')
@@ -332,7 +332,7 @@
                   <input type="text" 
                          name="nama_ibu" 
                          class="form-control @error('nama_ibu') is-invalid @enderror" 
-                         value="{{ old('nama_ibu') }}"
+                         value="{{ old('nama_ibu', $pendaftarSiswa->nama_ibu ?? '') }}"
                          placeholder="Nama lengkap ibu" 
                          required>
                   @error('nama_ibu')
@@ -345,7 +345,7 @@
                   <input type="text" 
                          name="pekerjaan_ayah" 
                          class="form-control @error('pekerjaan_ayah') is-invalid @enderror" 
-                         value="{{ old('pekerjaan_ayah') }}"
+                         value="{{ old('pekerjaan_ayah', $pendaftarSiswa->pekerjaan_ayah ?? '') }}"
                          placeholder="Pekerjaan ayah">
                   @error('pekerjaan_ayah')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -357,7 +357,7 @@
                   <input type="text" 
                          name="pekerjaan_ibu" 
                          class="form-control @error('pekerjaan_ibu') is-invalid @enderror" 
-                         value="{{ old('pekerjaan_ibu') }}"
+                         value="{{ old('pekerjaan_ibu', $pendaftarSiswa->pekerjaan_ibu ?? '') }}"
                          placeholder="Pekerjaan ibu">
                   @error('pekerjaan_ibu')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -369,7 +369,7 @@
                   <input type="tel" 
                          name="no_hp_ortu" 
                          class="form-control @error('no_hp_ortu') is-invalid @enderror" 
-                         value="{{ old('no_hp_ortu') }}"
+                         value="{{ old('no_hp_ortu', $pendaftarSiswa->no_ayah ?? '') }}"
                          placeholder="08xxxxxxxxxx" 
                          required>
                   @error('no_hp_ortu')

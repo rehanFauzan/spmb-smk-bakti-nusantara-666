@@ -156,6 +156,84 @@
         </div>
       </div>
     </div>
+    
+    <!-- Print Card (Hidden, only visible when printing) -->
+    <div class="print-card" style="display: none;">
+      <div class="print-header">
+        <div class="print-logo">
+          <img src="{{ asset('assets/img/baknus/bn2.png') }}" alt="Logo" style="width: 100%; height: 100%;">
+        </div>
+        <div class="print-title">SMK BAKTI NUSANTARA 666</div>
+        <div class="print-subtitle">KARTU HASIL SELEKSI PENERIMAAN PESERTA DIDIK BARU</div>
+        <div class="print-subtitle">TAHUN AJARAN 2026/2027</div>
+      </div>
+      
+      <div class="print-body">
+        <div class="print-info">
+          <div class="print-row">
+            <div class="print-label">No. Pendaftaran</div>
+            <div class="print-value">: {{ $pendaftar->no_pendaftaran }}</div>
+          </div>
+          <div class="print-row">
+            <div class="print-label">Nama Lengkap</div>
+            <div class="print-value">: {{ strtoupper($pendaftar->nama_lengkap) }}</div>
+          </div>
+          <div class="print-row">
+            <div class="print-label">Jurusan Pilihan</div>
+            <div class="print-value">: {{ $pendaftar->jurusan->nama_jurusan ?? '-' }}</div>
+          </div>
+          <div class="print-row">
+            <div class="print-label">Gelombang</div>
+            <div class="print-value">: {{ $pendaftar->gelombang->nama ?? '-' }}</div>
+          </div>
+          <div class="print-row">
+            <div class="print-label">Alamat</div>
+            <div class="print-value">: {{ $pendaftar->alamat ?? '-' }}</div>
+          </div>
+          <div class="print-row">
+            <div class="print-label">Status Seleksi</div>
+            <div class="print-value">: 
+              @if($pendaftar->hasil_seleksi === 'DITERIMA')
+                <span class="print-status">DITERIMA</span>
+              @else
+                <span style="color: #ffc107; font-weight: bold;">DALAM PROSES</span>
+              @endif
+            </div>
+          </div>
+          
+          @if($pendaftar->hasil_seleksi === 'DITERIMA')
+            <div style="margin-top: 20px; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+              <div style="font-weight: bold; margin-bottom: 8px;">PETUNJUK DAFTAR ULANG:</div>
+              <div style="font-size: 12px; line-height: 1.4;">
+                1. Lakukan daftar ulang paling lambat 7 hari setelah pengumuman<br>
+                2. Bawa dokumen asli untuk verifikasi ulang<br>
+                3. Datang ke sekolah pada jam kerja (08.00 - 15.00 WIB)
+              </div>
+            </div>
+          @endif
+        </div>
+        
+        <div class="print-photo">
+          @if(isset($pasFoto) && $pasFoto->nama_file)
+            <img src="{{ asset('storage/pendaftaran/' . Auth::id() . '/' . $pasFoto->nama_file) }}" 
+                 alt="Pas Foto" 
+                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+          @else
+            PAS FOTO<br>3 x 4
+          @endif
+        </div>
+      </div>
+      
+      <div class="print-footer">
+        <div>Alamat: Jl. Percobaan, Cileunyi, Bandung, Jawa Barat 40393</div>
+        <div>Telepon: (022) 8765-4321 | Email: info@smkbn666.sch.id</div>
+        <div style="margin-top: 10px;">Dicetak pada: {{ date('d F Y, H:i') }} WIB</div>
+      </div>
+    </div>
+
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -377,14 +455,120 @@
 }
 
 @media print {
-  .action-buttons, .breadcrumbs {
-    display: none !important;
+  body * {
+    visibility: hidden;
   }
   
-  .result-card {
-    box-shadow: none !important;
-    border: 2px solid #ddd !important;
+  .print-card, .print-card * {
+    visibility: visible;
+  }
+  
+  .print-card {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: white;
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 15px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .print-header {
+    text-align: center;
+    border-bottom: 2px solid #333;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .print-logo {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 10px;
+  }
+  
+  .print-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px 0;
+    color: #333;
+  }
+  
+  .print-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+  }
+  
+  .print-body {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .print-info {
+    flex: 1;
+  }
+  
+  .print-photo {
+    width: 120px;
+    height: 160px;
+    border: 2px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+  }
+  
+  .print-row {
+    display: flex;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  
+  .print-label {
+    width: 140px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .print-value {
+    flex: 1;
+    color: #333;
+  }
+  
+  .print-footer {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #333;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .print-status {
+    background: #28a745;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+    margin: 10px 0;
   }
 }
 </style>
+
+<script>
+// Show print card when printing
+window.addEventListener('beforeprint', function() {
+  document.querySelector('.print-card').style.display = 'block';
+});
+
+window.addEventListener('afterprint', function() {
+  document.querySelector('.print-card').style.display = 'none';
+});
+</script>
 @endsection

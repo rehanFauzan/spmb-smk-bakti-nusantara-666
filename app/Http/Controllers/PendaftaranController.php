@@ -224,7 +224,23 @@ class PendaftaranController extends Controller
         $gelombangAktif = Gelombang::getGelombangAktif();
         $allGelombang = Gelombang::getAllGelombang();
 
-        return view('pendaftaran.create', compact('gelombangAktif', 'allGelombang'));
+        // Ambil data yang sudah ada jika user sudah pernah mengisi
+        $pendaftarSiswa = \DB::table('pendaftar_data_siswa')
+            ->leftJoin('pendaftar_data_ortu', 'pendaftar_data_siswa.id', '=', 'pendaftar_data_ortu.pendaftar_id')
+            ->leftJoin('pendaftar_asal_sekolah', 'pendaftar_data_siswa.id', '=', 'pendaftar_asal_sekolah.pendaftar_id')
+            ->where('pendaftar_data_siswa.user_id', Auth::id())
+            ->select(
+                'pendaftar_data_siswa.*',
+                'pendaftar_data_ortu.nama_ayah',
+                'pendaftar_data_ortu.nama_ibu',
+                'pendaftar_data_ortu.pekerjaan_ayah',
+                'pendaftar_data_ortu.pekerjaan_ibu',
+                'pendaftar_data_ortu.no_ayah',
+                'pendaftar_asal_sekolah.nama_sekolah as asal_sekolah'
+            )
+            ->first();
+
+        return view('pendaftaran.create', compact('gelombangAktif', 'allGelombang', 'pendaftarSiswa'));
     }
 
     /**
@@ -361,10 +377,17 @@ class PendaftaranController extends Controller
                 ->with('error', 'Silakan lengkapi formulir pendaftaran terlebih dahulu.');
         }
 
+        // Ambil berkas yang sudah diupload
+        $berkas = \DB::table('pendaftar_berkas')
+            ->where('pendaftar_id', $pendaftarSiswa->id)
+            ->where('jenis', '!=', 'BUKTI_BAYAR')
+            ->get()
+            ->keyBy('jenis');
+
         // Convert untuk kompatibilitas dengan view
         $pendaftar = (object) ['id' => $pendaftarSiswa->id];
         
-        return view('pendaftaran.upload', compact('pendaftar'));
+        return view('pendaftaran.upload', compact('pendaftar', 'berkas'));
     }
 
     /**
@@ -493,6 +516,12 @@ class PendaftaranController extends Controller
             return redirect()->route('pendaftaran.form');
         }
 
+        // Ambil pas foto
+        $pasFoto = \DB::table('pendaftar_berkas')
+            ->where('pendaftar_id', $pendaftarSiswa->id)
+            ->where('jenis', 'PAS_FOTO')
+            ->first();
+
         // Convert ke object untuk kompatibilitas dengan view
         $pendaftar = (object) [
             'id' => $pendaftarSiswa->id,
@@ -500,10 +529,11 @@ class PendaftaranController extends Controller
             'no_pendaftaran' => $pendaftarSiswa->no_pendaftaran,
             'hasil_seleksi' => $pendaftarSiswa->status === 'PAID' ? 'DITERIMA' : 'PROSES',
             'jurusan' => (object) ['nama_jurusan' => $pendaftarSiswa->nama_jurusan],
-            'gelombang' => (object) ['nama' => $pendaftarSiswa->nama_gelombang]
+            'gelombang' => (object) ['nama' => $pendaftarSiswa->nama_gelombang],
+            'alamat' => $pendaftarSiswa->alamat
         ];
 
-        return view('pendaftaran.hasil', compact('pendaftar'));
+        return view('pendaftaran.hasil', compact('pendaftar', 'pasFoto'));
     }
 
     /**
@@ -525,7 +555,13 @@ class PendaftaranController extends Controller
             return redirect()->route('pendaftaran.form');
         }
 
-        return view('pendaftaran.pembayaran', compact('pendaftarSiswa'));
+        // Ambil bukti pembayaran yang sudah diupload
+        $buktiBayar = \DB::table('pendaftar_berkas')
+            ->where('pendaftar_id', $pendaftarSiswa->id)
+            ->where('jenis', 'BUKTI_BAYAR')
+            ->first();
+
+        return view('pendaftaran.pembayaran', compact('pendaftarSiswa', 'buktiBayar'));
     }
 
     /**
