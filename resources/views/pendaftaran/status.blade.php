@@ -242,36 +242,7 @@
       <!-- Sidebar Info -->
       <div class="col-lg-4">
         
-        <!-- Quick Actions -->
-        <div class="info-card mb-4" data-aos="fade-left" data-aos-delay="300">
-          <h6><i class="bi bi-lightning me-2"></i>Aksi Cepat</h6>
-          
-          <div class="action-buttons">
-            @if(!$hasBerkas)
-              <a href="{{ route('pendaftaran.upload') }}" class="btn btn-primary btn-sm w-100 mb-2">
-                <i class="bi bi-cloud-upload me-2"></i>Upload Berkas
-              </a>
-            @elseif($hasBerkas && !$hasPembayaran)
-              <a href="{{ route('pendaftaran.pembayaran') }}" class="btn btn-success btn-sm w-100 mb-2">
-                <i class="bi bi-credit-card me-2"></i>Lakukan Pembayaran
-              </a>
-            @endif
-            
-            @if($pendaftar->status === 'PAID')
-              <a href="{{ route('pendaftaran.hasil') }}" class="btn btn-info btn-sm w-100 mb-2">
-                <i class="bi bi-eye me-2"></i>Lihat Hasil Pendaftaran
-              </a>
-            @elseif($pendaftar->status === 'VERIFY')
-              <button class="btn btn-success btn-sm w-100 mb-2">
-                <i class="bi bi-download me-2"></i>Download Kartu Pendaftaran
-              </button>
-            @endif
-            
-            <button class="btn btn-outline-secondary btn-sm w-100" onclick="window.print()">
-              <i class="bi bi-printer me-2"></i>Cetak Status
-            </button>
-          </div>
-        </div>
+
 
         <!-- Data Summary -->
         <div class="info-card mb-4" data-aos="fade-left" data-aos-delay="400">
