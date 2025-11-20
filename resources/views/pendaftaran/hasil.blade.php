@@ -157,7 +157,7 @@
       </div>
     </div>
     
-    <!-- Print Card (Hidden, only visible when printing) -->
+    <!-- Print Hasil pendaftaran -->
     <div class="print-card" style="display: none;">
       <div class="print-header">
         <div class="print-logo">

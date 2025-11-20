@@ -41,8 +41,12 @@
       if (navUl) {
         if (body.classList.contains('mobile-nav-active')) {
           navUl.style.display = 'block';
+          navUl.style.opacity = '1';
+          navUl.style.visibility = 'visible';
         } else {
           navUl.style.display = 'none';
+          navUl.style.opacity = '0';
+          navUl.style.visibility = 'hidden';
         }
       }
     }
